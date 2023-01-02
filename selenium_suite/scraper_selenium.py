@@ -163,6 +163,47 @@ class SeleniumScraper:
         element = self.driver.find_element(selector_type, selector)
         return element.text
     
+    def get_elemAttr(self, selector, selector_type, attr) -> str:
+        """
+        This method gets the attribute from the specified element.
+        
+        :param selector: The selector to use.
+        :param selector_type: The type of selector to use.
+        :param attr: The attribute to get.
+        :return: None
+        """
+        if selector_type == 'css':
+            selector_type = By.CSS_SELECTOR
+        elif selector_type == 'xpath':
+            selector_type = By.XPATH
+        elif selector_type == 'id':
+            selector_type = By.ID
+        else:
+            raise ValueError('Invalid selector type.')
+            
+        element = self.driver.find_element(selector_type, selector)
+        return element.get_attribute(attr)
+    
+    def get_elemHTML(self, selector, selector_type) -> str:
+        """
+        This method gets the HTML from the specified element.
+        
+        :param selector: The selector to use.
+        :param selector_type: The type of selector to use.
+        :return: None
+        """
+        if selector_type == 'css':
+            selector_type = By.CSS_SELECTOR
+        elif selector_type == 'xpath':
+            selector_type = By.XPATH
+        elif selector_type == 'id':
+            selector_type = By.ID
+        else:
+            raise ValueError('Invalid selector type.')
+            
+        element = self.driver.find_element(selector_type, selector)
+        return element.get_attribute('innerHTML')
+    
     def check_with_css_selector(self, css_selector: str):
         """
         This method checks if the driver can access the specified css selector.
