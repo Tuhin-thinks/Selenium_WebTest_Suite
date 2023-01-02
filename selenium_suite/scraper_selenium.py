@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from webdriver_manager.chrome import ChromeDriverManager
-
+from global_settings import PRINT_FINDINGS
 
 class SeleniumScraper:
     
@@ -141,6 +141,8 @@ class SeleniumScraper:
         text = []
         for element in elements:
             text.append(element.text)
+            if PRINT_FINDINGS:  # print if allowed in global settings
+                print(text[-1])
         return text
     
     def get_elemText(self, selector, selector_type) -> str:
@@ -161,7 +163,10 @@ class SeleniumScraper:
             raise ValueError('Invalid selector type.')
             
         element = self.driver.find_element(selector_type, selector)
-        return element.text
+        _text = element.text
+        if PRINT_FINDINGS:
+            print(_text)
+        return _text
     
     def get_elemAttr(self, selector, selector_type, attr) -> str:
         """
