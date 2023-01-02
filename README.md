@@ -48,3 +48,4 @@ Contributions are welcome.  Please see the [contributing guidelines](CONTRIBUTIN
 - [ ] Add support for more complex pipelines.
 - [ ] Write tests for the test suite.
 - [ ] Add examples for the test suite. (**Important**)
+- [ ] Add timeout to urls taking longer than 5s to open.
