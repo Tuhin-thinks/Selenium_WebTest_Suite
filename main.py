@@ -129,7 +129,11 @@ def test_selenium():
         elif choice_ == "get_all_elemText":
             test_or_record = args[0]
             selector, selector_type = args[1], args[2]
-            selenium_test_suite.get_all_elemText(selector, selector_type)
+            results = selenium_test_suite.get_all_elemText(selector, selector_type)
+            _save = menu.SaveMenu()
+            to_save, save_path = _save.ask_save()
+            if to_save:
+                _save.save_file(results, save_path)
             if test_or_record == 'record':
                 test_suite_recorder.get_all_elemText(selector, selector_type)
         elif choice_ == "get_elemText":
