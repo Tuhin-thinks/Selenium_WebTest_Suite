@@ -1,0 +1,32 @@
+[
+    {
+        "press_key": {
+            "key": "esc"
+        }
+    },
+    {
+        "click_on": {
+            "selector": "input#fi-q",
+            "selector_type": "css"
+        }
+    },
+    {
+        "enter_text": {
+            "text": "Face wash"
+        }
+    },
+    {
+        "press_key": {
+            "key": "enter"
+        }
+    },
+    {
+        "get_all_elemText": {
+            "selector": "h3.name",
+            "selector_type": "css"
+        }
+    },
+    {
+        "exit": {}
+    }
+]
