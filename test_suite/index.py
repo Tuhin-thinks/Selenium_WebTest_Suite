@@ -128,6 +128,25 @@ class AutoTest:
         # record the step
         self.record_step({"get_elemAttr": {"selector": selector, "selector_type": selector_type, "attr": attr}})
     
+    def get_allElemAttr(self, attr, selector=None, selector_type=None):
+        # For this step, either we need to have a temp step to find the element, or
+        # the find element step should be a part of the get_allElemAttr step.
+        
+        if not (selector or selector_type):
+            # check if the temp test suite is empty
+            if not self.temp_test_suite:
+                raise ValueError('No element found.')
+            
+            # get the element (only the last element to be used)
+            element = self.temp_test_suite[-1]['find_element']
+            selector_type, selector = element['selector_type'], element['selector']
+            
+            # clear the temp test suite
+            self.temp_test_suite.clear()
+            
+        # record the step
+        self.record_step({"get_allElemAttr": {"selector": selector, "selector_type": selector_type, "attr": attr}})
+    
     def get_elemHTML(self, selector=None, selector_type=None):
         # For this step, either we need to have a temp step to find the element, or
         # the find element step should be a part of the get_elemHTML step.

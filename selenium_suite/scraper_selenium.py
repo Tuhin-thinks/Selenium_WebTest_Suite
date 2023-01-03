@@ -189,6 +189,30 @@ class SeleniumScraper:
         element = self.driver.find_element(selector_type, selector)
         return element.get_attribute(attr)
     
+    def get_allElemAttr(self, selector, selector_type, attr) -> list:
+        """
+        This method gets all the attributes from the specified element.
+        
+        :param selector: The selector to use.
+        :param selector_type: The type of selector to use.
+        :param attr: The attribute to get.
+        :return: None
+        """
+        if selector_type == 'css':
+            selector_type = By.CSS_SELECTOR
+        elif selector_type == 'xpath':
+            selector_type = By.XPATH
+        elif selector_type == 'id':
+            selector_type = By.ID
+        else:
+            raise ValueError('Invalid selector type.')
+            
+        elements = self.driver.find_elements(selector_type, selector)
+        attributes = []
+        for element in elements:
+            attributes.append(element.get_attribute(attr))
+        return attributes
+    
     def get_elemHTML(self, selector, selector_type) -> str:
         """
         This method gets the HTML from the specified element.

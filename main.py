@@ -31,7 +31,7 @@ Enter your choice:"""
     
     test_or_record = None
     selector, selector_type = None, None
-    if choice in ('7', '8', '9', '10'):
+    if choice in ('7', '8', '9', '10', '11'):
         # ask if user just wants to test it or record it
         test_or_record = input('Do you want to test or record this step? (test/record): ')
         # redirect user to the get_selector() menu
@@ -73,6 +73,10 @@ Enter your choice:"""
     
     elif choice == '10':
         return "get_elemHTML", test_or_record, selector, selector_type
+    
+    elif choice == '11':
+        attribute = input('Enter the attribute to get: ')
+        return "get_elemAttr", test_or_record, selector, selector_type, attribute
 
 
 def test_selenium():
@@ -136,20 +140,31 @@ def test_selenium():
                 _save.save_file(results, save_path)
             if test_or_record == 'record':
                 test_suite_recorder.get_all_elemText(selector, selector_type)
+        
         elif choice_ == "get_elemText":
             test_or_record = args[0]
             selector, selector_type = args[1], args[2]
             selenium_test_suite.get_elemText(selector, selector_type)
             if test_or_record == 'record':
                 test_suite_recorder.get_elemText(selector, selector_type)
-                
+        
         elif choice_ == "get_elemAttr":
             test_or_record = args[0]
             selector, selector_type = args[1], args[2]
             attribute = args[3]
-            selenium_test_suite.get_elemAttr(selector, selector_type, attribute)
+            attribute_string = selenium_test_suite.get_elemAttr(selector, selector_type, attribute)
+            print(attribute_string)
             if test_or_record == 'record':
                 test_suite_recorder.get_elemAttr(selector, selector_type)
+                
+        elif choice_ == "get_allElemAttr":
+            test_or_record = args[0]
+            selector, selector_type = args[1], args[2]
+            attribute = args[3]
+            all_attributes = selenium_test_suite.get_allElemAttr(selector, selector_type, attribute)
+            print(all_attributes)
+            if test_or_record == 'record':
+                test_suite_recorder.get_allElemAttr(selector, selector_type)
                 
         elif choice_ == "get_elemHTML":
             test_or_record = args[0]
